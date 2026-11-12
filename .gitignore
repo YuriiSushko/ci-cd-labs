@@ -5,3 +5,4 @@ __pycache__/
 data/
 *.dump
 .DS_Store
+shortnotes.md
