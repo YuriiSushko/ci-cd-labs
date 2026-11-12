@@ -7,6 +7,7 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 ENV PORT=8080
+ENV COUNTER_FILE=./data/visits.txt
 
 EXPOSE 8080
 
