@@ -1,0 +1,1 @@
+ghcr.io/yuriisushko/lab-02@sha256:711a025b76cb50f870ccc7d3ddbc735bab6457be596ff0e27c8d8d2c5626ca1b
