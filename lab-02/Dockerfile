@@ -1,18 +1,29 @@
-FROM python:3.12-slim
+# Stage 1: Build dependencies
+FROM python:3.12-slim AS builder
 
-RUN useradd --create-home --uid 6767 app 
+WORKDIR /build
+
+COPY requirements.txt .
+
+RUN python -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+
+# Stage 2: Runtime
+FROM python:3.12-slim AS runtime
+
+RUN useradd --create-home --uid 6767 app
 RUN mkdir -p /data && chown app:app /data
 
-USER app
+COPY --from=builder /opt/venv /opt/venv
+
+ENV PATH="/opt/venv/bin:$PATH"
+ENV PORT=8080
+ENV COUNTER_FILE=/data/visits.txt
 
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
 
-COPY app.py .
+COPY --chown=app:app app.py .
 
-ENV PORT=8080
-ENV COUNTER_FILE=./data/visits.txt
+USER app
 
 EXPOSE 8080
 
