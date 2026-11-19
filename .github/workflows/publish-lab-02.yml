@@ -41,7 +41,7 @@ jobs:
             context: ./lab-02
             file: ./lab-02/Dockerfile
             push: ${{ github.event_name == 'push' }}
-            tags: ghcr.io/${{ github.repository }}/lab-02:${{ github.sha }}
+            tags: ghcr.io/yuriisushko/lab-02:${{ github.sha }}
             labels: org.opencontainers.image.revision=${{ github.sha }}
             cache-from: type=gha
             cache-to: type=gha,mode=max
